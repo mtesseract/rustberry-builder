@@ -21,7 +21,7 @@ RUN cd /usr/local && \
     mv openssl-$VERS openssl && \
     export MACHINE=armv7 && \
     export ARCH=arm && \
-    export CC=armv7-unknown-linux-musleabihf-gcc && \
+    export CC=arm-linux-gnueabihf-gcc && \
     cd openssl && \
     ./config shared && \
     make
@@ -30,7 +30,7 @@ RUN cd /usr/local && \
     curl -O https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.2.tar.bz2 && \
     tar xjf alsa-lib-1.2.2.tar.bz2 && \
     cd alsa-lib-1.2.2 && \
-    export CC=armv7-unknown-linux-musleabihf-gcc && \
+    export CC=arm-linux-gnueabihf-gcc && \
     ./configure --host=armv7-unknown-linux-musleabihf && \
     make && \
     make install
