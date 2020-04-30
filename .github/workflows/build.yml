@@ -34,3 +34,4 @@ jobs:
         username: mtesseract
         password: ${{ secrets.DOCKER_PASSWORD }}
         cache: true
+        tags: latest
