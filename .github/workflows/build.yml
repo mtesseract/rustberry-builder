@@ -11,7 +11,8 @@ jobs:
 
     strategy:
       matrix:
-        arch: [arm-unknown-linux-gnueabihf, armv7-unknown-linux-gnueabihf, armv7-unknown-linux-musleabihf]
+        arch:
+        - armv7-unknown-linux-musleabihf
 
     runs-on: ubuntu-latest
 
