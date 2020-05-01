@@ -24,7 +24,7 @@ RUN apt-get update && \
     && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-ADD config.mak /tmp/config.mak
+ADD armv7-unknown-linux-musleabihf/config.mak /tmp/config.mak
 RUN cd /tmp && \
     curl -Lsq -o musl-cross-make.zip https://github.com/richfelker/musl-cross-make/archive/master.zip && \
     unzip -q musl-cross-make.zip && \
