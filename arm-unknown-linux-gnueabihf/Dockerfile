@@ -9,7 +9,7 @@ ARG RASPBERRY_PI_TOOLS_COMMIT_ID=b0c869bc929587a7e1d20a98e2dc828a24ca396a
 RUN curl -sL https://github.com/raspberrypi/tools/archive/$RASPBERRY_PI_TOOLS_COMMIT_ID.tar.gz \
     | tar xzf - -C /usr/local --strip-components=1 tools-${RASPBERRY_PI_TOOLS_COMMIT_ID}/arm-bcm2708
 
-ENV PATH=/usr/local/arm-bcm2708/arm-linux-gnueabihf/bin:$PATH
+ENV PATH=/usr/local/arm-bcm2708/arm-linux-gnueabihf/bin:/usr/local/arm-bcm2708/arm-bcm2708-linux-gnueabi/arm-bcm2708-linux-gnueabi/bin:$PATH
 ENV PATH=/usr/local/arm-bcm2708/arm-linux-gnueabihf/libexec/gcc/arm-linux-gnueabihf/4.9.3:$PATH
 ENV CC=arm-linux-gnueabihf-gcc
 
