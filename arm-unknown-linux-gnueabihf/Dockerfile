@@ -9,8 +9,9 @@ ARG RASPBERRY_PI_TOOLS_COMMIT_ID=b0c869bc929587a7e1d20a98e2dc828a24ca396a
 RUN curl -sL https://github.com/raspberrypi/tools/archive/$RASPBERRY_PI_TOOLS_COMMIT_ID.tar.gz \
     | tar xzf - -C /usr/local --strip-components=1 tools-${RASPBERRY_PI_TOOLS_COMMIT_ID}/arm-bcm2708
 
-ENV PATH=/usr/local/arm-bcm2708/arm-linux-gnueabihf/bin:$PATH
+ENV PATH=/usr/local/arm-bcm2708/arm-linux-gnueabihf/bin:/usr/local/arm-bcm2708/arm-bcm2708-linux-gnueabi/arm-bcm2708-linux-gnueabi/bin:$PATH
 ENV PATH=/usr/local/arm-bcm2708/arm-linux-gnueabihf/libexec/gcc/arm-linux-gnueabihf/4.9.3:$PATH
+ENV CC=arm-linux-gnueabihf-gcc
 
 RUN cd /usr/local && \
     VERS="1.1.1g" && \
@@ -19,7 +20,6 @@ RUN cd /usr/local && \
     mv openssl-$VERS openssl && \
     export MACHINE=armv6 && \
     export ARCH=arm && \
-    export CC=arm-linux-gnueabihf-gcc && \
     cd openssl && \
     ./config shared && \
     make
@@ -28,10 +28,18 @@ RUN cd /usr/local && \
     curl -O https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.2.tar.bz2 && \
     tar xjf alsa-lib-1.2.2.tar.bz2 && \
     cd alsa-lib-1.2.2 && \
-    export CC=arm-linux-gnueabihf-gcc && \
     ./configure --host=arm-linux-gnueabihf && \
     make && \
     make install
+
+ENV OPENSSL_LIB_DIR=/usr/local/openssl
+ENV OPENSSL_INCLUDE_DIR=/usr/local/openssl/include
+ENV OPENSSL_LIB_DIR=/usr/local/openssl
+ENV OPENSSL_INCLUDE_DIR=/usr/local/openssl/include
+ENV PKG_CONFIG_ALLOW_CROSS=1
+ENV PATH="/root/.cargo/bin:$PATH"
+ENV CARGO_HOME=/root/.cargo
+ENV RUSTUP_HOME=/root/.rustup
 
 RUN curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
     && . ~/.cargo/env \
