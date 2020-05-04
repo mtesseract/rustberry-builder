@@ -2,34 +2,37 @@ name: Build Docker Images
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     strategy:
       matrix:
-        arch: [arm-unknown-linux-gnueabihf, armv7-unknown-linux-gnueabihf]
+        arch:
+          # - armv7-unknown-linux-musleabihf
+          - armv7-unknown-linux-gnueabihf
+          - arm-unknown-linux-gnueabihf
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    # - name: Build Image using Cache
-    #   uses: whoan/docker-build-with-cache-action@v5.0.1
-    #   with:
-    #     dockerfile: ${{ matrix.arch }}/Dockerfile
-    #     username: mtesseract
-    #     password: "${{ secrets.GITHUB_TOKEN }}"
-    #     image_name: mtesseract/rustberry-builder/rustberry-builder-${{ matrix.arch }}
-    #     registry: docker.pkg.github.com
-    - name: Publish Docker
-      uses: elgohr/Publish-Docker-Github-Action@2.14
-      with:
-        name: mtesseract/rustberry-builder-${{ matrix.arch }}
-        dockerfile: ${{ matrix.arch }}/Dockerfile
-        username: mtesseract
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        cache: true
+      - uses: actions/checkout@v2
+      # - name: Build Image using Cache
+      #   uses: whoan/docker-build-with-cache-action@v5.0.1
+      #   with:
+      #     dockerfile: ${{ matrix.arch }}/Dockerfile
+      #     username: mtesseract
+      #     password: "${{ secrets.GITHUB_TOKEN }}"
+      #     image_name: mtesseract/rustberry-builder/rustberry-builder-${{ matrix.arch }}
+      #     registry: docker.pkg.github.com
+      - name: Publish Docker
+        uses: elgohr/Publish-Docker-Github-Action@2.14
+        with:
+          name: mtesseract/rustberry-builder-${{ matrix.arch }}
+          dockerfile: ${{ matrix.arch }}/Dockerfile
+          username: mtesseract
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          cache: true
+          tags: latest
