@@ -29,4 +29,5 @@ RUN curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
     && . ~/.cargo/env \
     && rustup target add armv7-unknown-linux-gnueabihf \
     && cargo install cargo-build-deps \
-    && echo "[target.armv7-unknown-linux-gnueabihf]\nlinker = \"arm-linux-gnueabihf-gcc\"\n" > ~/.cargo/config
+    && echo "[target.armv7-unknown-linux-gnueabihf]\nlinker = \"arm-linux-gnueabihf-gcc\"\n" > ~/.cargo/config \
+    && cargo install cargo-watch

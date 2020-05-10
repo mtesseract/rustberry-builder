@@ -81,11 +81,11 @@ RUN cd /usr/local && \
     make install && \
     echo disabled: rm -r alsa-lib-1.2.2.tar.bz2 alsa-lib-1.2.2
 
-
 RUN curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
     && . ~/.cargo/env \
     && rustup target add arm-unknown-linux-gnueabihf \
-    && echo '[target.arm-unknown-linux-gnueabihf]\nlinker = "arm-linux-gnueabihf-gcc"' > ~/.cargo/config
+    && echo '[target.arm-unknown-linux-gnueabihf]\nlinker = "arm-linux-gnueabihf-gcc"' > ~/.cargo/config \
+    && cargo install cargo-watch
 
 ENV PKG_CONFIG_ALLOW_CROSS=1
 ENV PATH="/root/.cargo/bin:$PATH"
