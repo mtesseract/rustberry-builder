@@ -28,7 +28,7 @@ jobs:
       #     image_name: mtesseract/rustberry-builder/rustberry-builder-${{ matrix.arch }}
       #     registry: docker.pkg.github.com
       - name: Publish Docker
-        uses: elgohr/Publish-Docker-Github-Action@2.14
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: mtesseract/rustberry-builder-${{ matrix.arch }}
           dockerfile: ${{ matrix.arch }}/Dockerfile
